@@ -171,16 +171,22 @@ public class Dashboard{
             @Override
                 public void actionPerformed(ActionEvent arg0) {
                     Users penyewa = new Users();
-                    penyewa.insertPenyewa(getNIK(),getNamaPenyewa());
+                    String data[][] = penyewa.getUserByNIK(getNIK());
+                    if(data[0][0] == null){
+                        penyewa.insertPenyewa(getNIK(),getNamaPenyewa());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"NIK telah terdaftar dalam sistem");
+                    }
                 }
             });
             
             btnKendaraan.addActionListener(new ActionListener() {
             @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    Mobil mobil = new Mobil();
+                    Kendaraan kendaraan = new Kendaraan();
                     String data[][] = new String[10][5];
-                    data = mobil.getDataKendaraan();
+                    data = kendaraan.getDataKendaraan();
                     Object namaKolom[] = {"Nama","Merek","Plat","Harga","Jenis"}; //membuat kolom dgn array tipe object;
                     
                     JFrame window2 = new JFrame("Data Kendaraan");
@@ -192,6 +198,13 @@ public class Dashboard{
 
                     scrollPane.setBounds(20, 35, 500, 300);
                     scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                }
+            });
+            
+            btnSewa.addActionListener(new ActionListener() {
+            @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    System.exit(0); // close program
                 }
             });
             

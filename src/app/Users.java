@@ -40,6 +40,29 @@ public class Users {
         }
     }
     
+    public String[][] getUserByNIK(String nik){
+        String data[][] = new String[1][3];
+        int jmlData = 0;
+        try{
+            String query = "SELECT * FROM users WHERE nik='"+nik+"'";
+            connector.statement = connector.koneksi.createStatement();
+            ResultSet resultSet = connector.statement.executeQuery(query);
+            while(resultSet.next()){ //konversi tabel ke string
+                data[jmlData][0] = resultSet.getString("id"); 
+                data[jmlData][1] = resultSet.getString("username"); 
+                data[jmlData][2] = resultSet.getString("password");
+                jmlData++; 
+            }
+            connector.statement.close();
+           
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            
+        }finally{
+            return data;
+        }
+    }
+    
     public boolean passwordMatch(String password,String passwordDB) throws NoSuchAlgorithmException{
         password = sha256.generate(password);
         if (password.equals(passwordDB)) {

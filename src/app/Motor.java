@@ -13,32 +13,9 @@ import javax.swing.JOptionPane;
  *
  * @author Lenovo
  */
-public class Motor implements Kendaraan {
+public class Motor extends Kendaraan {
     Connector connector = new Connector();
-    
-    public String[][] getDataKendaraan() {
-        String data[][] = new String[10][3];
-        int jmlData = 0;
-        try{
-            String query = "SELECT * FROM kendaraan";
-            connector.statement = connector.koneksi.createStatement();
-            ResultSet resultSet = connector.statement.executeQuery(query);
-            while(resultSet.next()){ //konversi tabel ke string
-                data[jmlData][0] = resultSet.getString("id"); 
-                data[jmlData][1] = resultSet.getString("username"); 
-                data[jmlData][2] = resultSet.getString("password");
-                jmlData++; 
-            }
-            connector.statement.close();
-           
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-            
-        }finally{
-            return data;
-        }
-    }
-    
+       
     public String[][] getMotor() {
         String data[][] = new String[1][3];
         int jmlData = 0;
