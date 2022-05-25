@@ -41,7 +41,7 @@ public class Users {
     }
     
     public String[][] getUserByNIK(String nik){
-        String data[][] = new String[1][3];
+        String data[][] = new String[1][5];
         int jmlData = 0;
         try{
             String query = "SELECT * FROM users WHERE nik='"+nik+"'";
@@ -49,8 +49,10 @@ public class Users {
             ResultSet resultSet = connector.statement.executeQuery(query);
             while(resultSet.next()){ //konversi tabel ke string
                 data[jmlData][0] = resultSet.getString("id"); 
-                data[jmlData][1] = resultSet.getString("username"); 
-                data[jmlData][2] = resultSet.getString("password");
+                data[jmlData][1] = resultSet.getString("nik"); 
+                data[jmlData][2] = resultSet.getString("username");
+                data[jmlData][3] = resultSet.getString("password"); 
+                data[jmlData][4] = resultSet.getString("role");
                 jmlData++; 
             }
             connector.statement.close();

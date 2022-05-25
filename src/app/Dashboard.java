@@ -204,7 +204,7 @@ public class Dashboard{
             btnSewa.addActionListener(new ActionListener() {
             @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    System.exit(0); // close program
+                    Sewa sewa = new Sewa();
                 }
             });
             

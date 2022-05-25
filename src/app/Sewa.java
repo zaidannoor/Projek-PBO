@@ -65,7 +65,36 @@ public class Sewa {
             btnSubmit.addActionListener(new ActionListener() {
             @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    
+                    Kendaraan kendaraan = new Kendaraan();
+                    Users penyewa = new Users();
+                    String datapenyewa[][] = penyewa.getUserByNIK(getNIK());
+                    String datakendaraan[][] = kendaraan.getKendaraanByPlat(getPlat());
+                    if((datakendaraan[0][0] == null) || (datapenyewa[0][0] == null)){
+                        JOptionPane.showMessageDialog(null,"NIK tidak terdaftar dalam sistem "
+                                + "atau kendaraan dengan plat tersebut tidak ada");
+                        System.out.println(datakendaraan[0][0]);
+                        System.out.println(datakendaraan[0][1]);
+
+                        System.out.println(datapenyewa[0][0]);
+                    }
+                    else{
+                        if("ready".equals(datakendaraan[0][5])){
+                            String id_penyewa = datapenyewa[0][0];
+                            String id_kendaraan = datakendaraan[0][0];
+                            String id_pegawai = getPegawai();
+                            String lama_pinjam = getPinjam();
+                            Peminjaman peminjaman = new Peminjaman();
+                            peminjaman.insertPeminjaman(id_penyewa, id_pegawai, id_kendaraan, lama_pinjam);
+                            
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Kendaraan yang diminta sedang tidak siap");
+                            System.out.println(datakendaraan[0][0]);
+                            System.out.println(datakendaraan[0][5]);
+                        System.out.println(datapenyewa[0][0]);
+                        }
+                        
+                        
+                    }
                 }
             });
     }
