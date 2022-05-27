@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Users.java</file>
+            <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Kendaraan.java</file>
             <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Mobil.java</file>
             <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Dashboard.java</file>
             <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Main.java</file>
-            <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Login.java</file>
+            <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Peminjaman.java</file>
+            <file>file:/D:/Belajar-Java/ProjekPBO/src/app/Motor.java</file>
         </group>
     </open-files>
 </project-private>

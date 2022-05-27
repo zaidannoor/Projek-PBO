@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Lenovo
@@ -44,19 +45,17 @@ public class Dashboard{
         
         
     JButton btnKendaraan = new JButton("Data Kendaraan");
-    JButton btnClose = new JButton("Close");
     JButton btnPeminjaman = new JButton("Data Penyewaan");
     JButton btnSewa = new JButton("Sewa Kendaraan");
     JButton btnSubmitKendaraan = new JButton("Submit Data Kendaraan");
     JButton btnSubmitPenyewa = new JButton("Submit Data Penyewa");
     
-    JTable tabel;
-    DefaultTableModel tableModel; //otomatis dibuat kalo buat JTable
-    JScrollPane scrollPane;
+    
     
     public Dashboard(String nama){
         
         greeting = new JLabel("Selamat datang, " + nama);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
         window.setSize(1000,500);
         window.setVisible(true);
@@ -94,7 +93,6 @@ public class Dashboard{
             window.add(tfalamat);
             // button
             window.add(btnKendaraan);
-            window.add(btnClose);
             window.add(btnPeminjaman);
             window.add(btnSewa);
             window.add(btnSubmitKendaraan);
@@ -134,15 +132,7 @@ public class Dashboard{
             btnSubmitPenyewa.setBounds(750, 272, 180, 20);
             btnSubmitKendaraan.setBounds(410, 350, 180, 20);
             btnSewa.setBounds(40,380,200,50);
-            btnClose.setBounds(880, 15, 80, 20);
             
-            
-            btnClose.addActionListener(new ActionListener() {
-            @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    System.exit(0); // close program
-                }
-            });
             
             btnSubmitKendaraan.addActionListener(new ActionListener() {
                 String jenis;
@@ -190,6 +180,9 @@ public class Dashboard{
                     Object namaKolom[] = {"Nama","Merek","Plat","Harga","Jenis"}; //membuat kolom dgn array tipe object;
                     
                     JFrame window2 = new JFrame("Data Kendaraan");
+                    JTable tabel;
+                    DefaultTableModel tableModel; //otomatis dibuat kalo buat JTable
+                    JScrollPane scrollPane;
                     tabel = new JTable(data,namaKolom); //tabel merupakan variabel untuk tabelnya dengan isi tablemodel
                     window2.setSize(550,500);
                     window2.setVisible(true);
@@ -205,6 +198,14 @@ public class Dashboard{
             @Override
                 public void actionPerformed(ActionEvent arg0) {
                     Sewa sewa = new Sewa();
+                }
+            });
+            
+            btnPeminjaman.addActionListener(new ActionListener() {
+            @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    ViewPeminjaman viewpeminjaman = new ViewPeminjaman();
+//                    
                 }
             });
             

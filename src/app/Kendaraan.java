@@ -15,7 +15,7 @@ public class Kendaraan {
     Connector connector = new Connector();
     
     public String[][] getDataKendaraan() {
-        String data[][] = new String[10][5];
+        String data[][] = new String[50][5];
         int jmlData = 0;
         try{
             String query = "SELECT * FROM kendaraan";

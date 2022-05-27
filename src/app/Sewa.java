@@ -72,10 +72,7 @@ public class Sewa {
                     if((datakendaraan[0][0] == null) || (datapenyewa[0][0] == null)){
                         JOptionPane.showMessageDialog(null,"NIK tidak terdaftar dalam sistem "
                                 + "atau kendaraan dengan plat tersebut tidak ada");
-                        System.out.println(datakendaraan[0][0]);
-                        System.out.println(datakendaraan[0][1]);
-
-                        System.out.println(datapenyewa[0][0]);
+                        
                     }
                     else{
                         if("ready".equals(datakendaraan[0][5])){
@@ -83,14 +80,15 @@ public class Sewa {
                             String id_kendaraan = datakendaraan[0][0];
                             String id_pegawai = getPegawai();
                             String lama_pinjam = getPinjam();
+                            int hargasehari = Integer.parseInt(datakendaraan[0][4]);
+                            int total_harga = hargasehari * Integer.parseInt(lama_pinjam);
+                           
                             Peminjaman peminjaman = new Peminjaman();
-                            peminjaman.insertPeminjaman(id_penyewa, id_pegawai, id_kendaraan, lama_pinjam);
+                            peminjaman.insertPeminjaman(id_penyewa, id_pegawai, id_kendaraan, lama_pinjam,total_harga);
                             
                         }else{
                             JOptionPane.showMessageDialog(null,"Kendaraan yang diminta sedang tidak siap");
-                            System.out.println(datakendaraan[0][0]);
-                            System.out.println(datakendaraan[0][5]);
-                        System.out.println(datapenyewa[0][0]);
+                            
                         }
                         
                         
