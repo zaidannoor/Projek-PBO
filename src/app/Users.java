@@ -16,12 +16,36 @@ public class Users {
     Connector connector = new Connector();
     SHA256 sha256 = new SHA256();
     
+    public String[][] getPenyewa(){
+        String data[][] = new String[50][4];
+        int jmlData = 0;
+        try{
+            String query = "SELECT id,nik,username,alamat FROM users WHERE role='penyewa'";
+            connector.statement = connector.koneksi.createStatement();
+            ResultSet resultSet = connector.statement.executeQuery(query);
+            while(resultSet.next()){ //konversi tabel ke string
+                data[jmlData][0] = resultSet.getString("id"); 
+                data[jmlData][1] = resultSet.getString("nik"); 
+                data[jmlData][2] = resultSet.getString("username");
+                data[jmlData][3] = resultSet.getString("alamat");
+                jmlData++; 
+            }
+            connector.statement.close();
+           
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            
+        }finally{
+            return data;
+        }
+    }
     
-    public String[][] getUserByUsername(String username){
+    public String[][] getPegawaiByUsername(String username){
         String data[][] = new String[1][3];
         int jmlData = 0;
         try{
-            String query = "SELECT * FROM users WHERE username='"+username+"'";
+            String query = "SELECT id,username,password FROM users WHERE username='"+username+"'"
+                    + " AND role='pegawai' ";
             connector.statement = connector.koneksi.createStatement();
             ResultSet resultSet = connector.statement.executeQuery(query);
             while(resultSet.next()){ //konversi tabel ke string
@@ -74,16 +98,87 @@ public class Users {
         }
    }
     
-    public int insertPenyewa(String nik, String username){
+    public int insertPenyewa(String nik, String username,String alamat){
      
         try {
-            String query = "INSERT INTO users (nik,username,password,role) "
-                    + "VALUES ('"+nik+"','"+username+"','','penyewa')";
+            String query = "INSERT INTO users (nik,username,password,alamat,role) "
+                    + "VALUES ('"+nik+"','"+username+"','','"+alamat+"' ,'penyewa')";
             
             connector.statement = connector.koneksi.createStatement();
             connector.statement.executeUpdate(query); // eksekusi query
 
             JOptionPane.showMessageDialog(null,"Registrasi Berhasil !!");
+            return 1;
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public boolean checkID(String id){
+        boolean found = false;
+        try{
+            String query = "SELECT id from users WHERE role='penyewa'";
+            connector.statement = connector.koneksi.createStatement();
+            ResultSet resultSet = connector.statement.executeQuery(query);
+            while(resultSet.next()){ //konversi tabel ke string
+                if(resultSet.getString("id").equals(id)){
+                    found = true;
+                    break;
+                }     
+            }
+            return found;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            return found;
+        }   
+    }
+    
+    public boolean checkNIK(String nik){
+        boolean found = false;
+        try{
+            String query = "SELECT nik from users";
+            connector.statement = connector.koneksi.createStatement();
+            ResultSet resultSet = connector.statement.executeQuery(query);
+            while(resultSet.next()){ //konversi tabel ke string
+                if(resultSet.getString("nik").equals(nik)){
+                    found = true;
+                    break;
+                }     
+            }
+            return found;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            return found;
+        }   
+    }
+    
+    public int updatePenyewa(String id,String nik,String alamat){
+
+        try {
+            String query = "UPDATE users set nik='"+nik+"', alamat='"+alamat+"' WHERE id='"+id+"'";
+                   
+            
+            connector.statement = connector.koneksi.createStatement();
+            connector.statement.executeUpdate(query); // eksekusi query
+
+            JOptionPane.showMessageDialog(null,"Update data Berhasil !!");
+            return 1;
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
+    
+    
+    public int deleteData(String id){
+        try {
+            String query = "DELETE FROM peminjaman WHERE id='"+id+"'";
+            
+            connector.statement = connector.koneksi.createStatement();
+            connector.statement.executeUpdate(query); // eksekusi query
+
+            JOptionPane.showMessageDialog(null,"Data berhasil dihapus");
             return 1;
         } catch (Exception ex){
             System.out.println(ex.getMessage());

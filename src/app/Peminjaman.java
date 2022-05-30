@@ -78,7 +78,6 @@ public class Peminjaman {
     }
     
     public boolean checkID(String id){
-        String data[][] = new String[50][1];
         boolean found = false;
         try{
             String query = "SELECT id from peminjaman";

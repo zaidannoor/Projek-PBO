@@ -45,7 +45,8 @@ public class Dashboard{
         
         
     JButton btnKendaraan = new JButton("Data Kendaraan");
-    JButton btnPeminjaman = new JButton("Data Penyewaan");
+    JButton btnPeminjaman = new JButton("Data Rental");
+    JButton btnPenyewa = new JButton("Data Penyewa");
     JButton btnSewa = new JButton("Sewa Kendaraan");
     JButton btnSubmitKendaraan = new JButton("Submit Data Kendaraan");
     JButton btnSubmitPenyewa = new JButton("Submit Data Penyewa");
@@ -94,6 +95,7 @@ public class Dashboard{
             // button
             window.add(btnKendaraan);
             window.add(btnPeminjaman);
+            window.add(btnPenyewa);
             window.add(btnSewa);
             window.add(btnSubmitKendaraan);
             window.add(btnSubmitPenyewa);
@@ -128,7 +130,8 @@ public class Dashboard{
             tfalamat.setBounds(790, 232, 120, 20);
             
             btnKendaraan.setBounds(80, 160, 140, 20);
-            btnPeminjaman.setBounds(80,205,140,20);
+            btnPenyewa.setBounds(80,205,140,20);
+            btnPeminjaman.setBounds(80,245,140,20);
             btnSubmitPenyewa.setBounds(750, 272, 180, 20);
             btnSubmitKendaraan.setBounds(410, 350, 180, 20);
             btnSewa.setBounds(40,380,200,50);
@@ -163,7 +166,7 @@ public class Dashboard{
                     Users penyewa = new Users();
                     String data[][] = penyewa.getUserByNIK(getNIK());
                     if(data[0][0] == null){
-                        penyewa.insertPenyewa(getNIK(),getNamaPenyewa());
+                        penyewa.insertPenyewa(getNIK(),getNamaPenyewa(),getAlamat());
                     }
                     else{
                         JOptionPane.showMessageDialog(null,"NIK telah terdaftar dalam sistem");
@@ -174,23 +177,8 @@ public class Dashboard{
             btnKendaraan.addActionListener(new ActionListener() {
             @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    Kendaraan kendaraan = new Kendaraan();
-                    String data[][] = new String[10][5];
-                    data = kendaraan.getDataKendaraan();
-                    Object namaKolom[] = {"Nama","Merek","Plat","Harga","Jenis"}; //membuat kolom dgn array tipe object;
+                    ViewKendaraan viewkendaraan = new ViewKendaraan();
                     
-                    JFrame window2 = new JFrame("Data Kendaraan");
-                    JTable tabel;
-                    DefaultTableModel tableModel; //otomatis dibuat kalo buat JTable
-                    JScrollPane scrollPane;
-                    tabel = new JTable(data,namaKolom); //tabel merupakan variabel untuk tabelnya dengan isi tablemodel
-                    window2.setSize(550,500);
-                    window2.setVisible(true);
-                    scrollPane = new JScrollPane(tabel);
-                    window2.add(scrollPane);
-
-                    scrollPane.setBounds(20, 35, 500, 300);
-                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                 }
             });
             
@@ -205,6 +193,14 @@ public class Dashboard{
             @Override
                 public void actionPerformed(ActionEvent arg0) {
                     ViewPeminjaman viewpeminjaman = new ViewPeminjaman();
+//                    
+                }
+            });
+            
+            btnPenyewa.addActionListener(new ActionListener() {
+            @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    ViewPenyewa viewpenyewa = new ViewPenyewa();
 //                    
                 }
             });

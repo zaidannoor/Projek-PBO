@@ -72,7 +72,7 @@ public class Login {
             public void actionPerformed(ActionEvent arg0) {
                 Users user = new Users();
                 String data[][] = new String[1][3];
-                data = user.getUserByUsername(getUsername()); // mengambil data dari database
+                data = user.getPegawaiByUsername(getUsername()); // mengambil data dari database
                
                 if(data[0][0] == null){ // mengecek ada atau tidak username tersebut di database
                                         // jika tidak ada maka tampilkan pesan kesalahan
@@ -86,7 +86,7 @@ public class Login {
                         if(user.passwordMatch(password,passwordDB)){ // mengecek password inputan dengan password di database
                                                                     // lebih jelasnya bisa lihat method passwordMatch di model users
                             JOptionPane.showMessageDialog(null,"Login Berhasil");
-                            Dashboard dashboard = new Dashboard("zaidan");
+                            Dashboard dashboard = new Dashboard(data[0][1]);
                             window.setVisible(false);
                         }
                         else{
