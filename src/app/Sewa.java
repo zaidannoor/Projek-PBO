@@ -85,7 +85,7 @@ public class Sewa {
                            
                             Peminjaman peminjaman = new Peminjaman();
                             peminjaman.insertPeminjaman(id_penyewa, id_pegawai, id_kendaraan, lama_pinjam,total_harga);
-                            
+                            kendaraan.changeStatusToNotReady(id_kendaraan);
                         }else{
                             JOptionPane.showMessageDialog(null,"Kendaraan yang diminta sedang tidak siap");
                             

@@ -77,6 +77,29 @@ public class Peminjaman {
         }
     }
     
+    public String[][] getIDKendaraan(String id){
+        String data[][] = new String[1][1];
+        int jmlData = 0;
+        try {
+            String query = "SELECT id_kendaraan from peminjaman WHERE id='"+id+"'";
+            connector.statement = connector.koneksi.createStatement();
+            ResultSet resultSet = connector.statement.executeQuery(query);
+            
+            while(resultSet.next()){ //konversi tabel ke string
+                data[jmlData][0] = resultSet.getString("id_kendaraan");
+                
+                jmlData++; 
+            }
+              
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            return data;
+        }
+    }
+    
+    
+    
     public boolean checkID(String id){
         boolean found = false;
         try{
@@ -110,6 +133,8 @@ public class Peminjaman {
             return 0;
         }
     }
+    
+    
     
     public int deleteData(String id){
         try {

@@ -105,6 +105,36 @@ public class Kendaraan {
         }
     }
     
+    public int changeStatusToNotReady(String id){
+        try {
+            String query = "UPDATE kendaraan SET status='not ready' WHERE id='"+id+"'";
+            
+            connector.statement = connector.koneksi.createStatement();
+            connector.statement.executeUpdate(query); // eksekusi query
+
+            //JOptionPane.showMessageDialog(null,"Status berhasil diubah menjadi selesai");
+            return 1;
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int changeStatusToReady(String id){
+        try {
+            String query = "UPDATE kendaraan SET status='ready' WHERE id='"+id+"'";
+            
+            connector.statement = connector.koneksi.createStatement();
+            connector.statement.executeUpdate(query); // eksekusi query
+
+            //JOptionPane.showMessageDialog(null,"Status berhasil diubah menjadi selesai");
+            return 1;
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return 0;
+        }
+    }
+    
     
 
     

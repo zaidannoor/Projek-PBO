@@ -32,6 +32,7 @@ public class ViewPeminjaman {
         
     public ViewPeminjaman(){
         Peminjaman peminjaman = new Peminjaman();
+        Kendaraan kendaraan = new Kendaraan();
         String data[][] = peminjaman.getDataPeminjaman();
         window.setLayout(null);
         window.setSize(800,600);
@@ -65,8 +66,11 @@ public class ViewPeminjaman {
             @Override
                 public void actionPerformed(ActionEvent arg0) {
                     Peminjaman peminjaman = new Peminjaman();
+                    
                     if(peminjaman.checkID(getID())){
-                        peminjaman.changeStatus(getID());
+                        peminjaman.changeStatus(getID()); // ubah status jadi selesai
+                        String id_kendaraan[][] = peminjaman.getIDKendaraan(getID()); // ambil id kendaraan
+                        kendaraan.changeStatusToReady(id_kendaraan[0][0]);
                     }else{
                         JOptionPane.showMessageDialog(null,"ID peminjaman "+ getID()+ " tidak ditemukan");
                     }
